@@ -1,5 +1,5 @@
 //
-//  main.swift
+//  Wand.swift
 //  P3_DA iOS
 //
 //  Created by William on 19/12/2017.
@@ -8,6 +8,13 @@
 
 import Foundation
 
-
+class Wand: Weapon {
+    
+    init() {
+        super.init(damage: 0, magicPower: 15)
+    }
+    
+    
+}
 
 

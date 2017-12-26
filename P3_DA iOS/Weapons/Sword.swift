@@ -1,5 +1,5 @@
 //
-//  main.swift
+//  Sword.swift
 //  P3_DA iOS
 //
 //  Created by William on 19/12/2017.
@@ -8,6 +8,8 @@
 
 import Foundation
 
-
-
-
+class Sword: Weapon {
+    init() {
+        super.init(damage: 10, magicPower: 0)
+    }
+}
