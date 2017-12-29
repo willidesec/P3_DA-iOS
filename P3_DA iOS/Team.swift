@@ -9,5 +9,5 @@
 import Foundation
 
 class Team {
-    var chararcters = [Character]()
+    var characters = [Character]()
 }
