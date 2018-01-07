@@ -9,10 +9,12 @@
 import Foundation
 
 class Weapon {
+    var name: String
     var damage: Int
     var magicPower: Int
     
-    init(damage: Int, magicPower: Int) {
+    init(name: String, damage: Int, magicPower: Int) {
+        self.name = name
         self.damage = damage
         self.magicPower = magicPower
     }

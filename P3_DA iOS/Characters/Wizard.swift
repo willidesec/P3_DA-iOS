@@ -18,8 +18,16 @@ class Wizard: Character {
     }
     
     func heal(target: Character) {
-        if self.life > 0 && target.life > 0 {
-        target.life += self.weapon.magicPower
+        if target.life == target.maxLife {
+            print("The character's life is full, you can't heal him")
+        } else if self.life > 0 && target.life > 0 {
+            target.life += self.weapon.magicPower
         }
     }
+    
+    override func describeCharacter() {
+        print("\(type) - \(name) - Life points: \(life) - Weapon: \(weapon.name) - Magic Power: \(weapon.magicPower) ")
+    }
 }
+
+

@@ -10,4 +10,12 @@ import Foundation
 
 class Team {
     var characters = [Character]()
+    
+    func describeTeamType() {
+        var x = 1
+        for character in characters {
+            print("\(x) - \(character.type)")
+            x += 1
+        }
+    }
 }
