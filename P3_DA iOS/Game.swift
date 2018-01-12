@@ -30,7 +30,7 @@ class Game {
         for team in teams {
             print()
             print("Composition of Team \(x)")
-            team.describeTeamType()
+            team.describeTeam()
             x += 1
         }
         
@@ -39,14 +39,22 @@ class Game {
         print("Fight !")
         repeat {
             combat()
-        } while !(teams[0].characters.isEmpty) || !(teams[1].characters.isEmpty)
+        } while teams[0].teamLife != 0 && teams[1].teamLife != 0
+        
+        if teams[0].teamLife > 0 {
+            print()
+            print("The Winner is the Team 1 !")
+        } else {
+            print()
+            print("The Winner is the Team 2 !")
+        }
+        
+        print()
+        print("End of the game !")
+        
     }
     
 
-    
-    
-    
-    
     
     func createCharacter() -> [Character] {
         var choiceUser = 0
@@ -102,30 +110,22 @@ class Game {
         }
         return characterList
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     func combat() {
     
             for x in 0..<2 {
             
                 var choiceUser = 0
-                var choiceUser2 = 0
+                var characterSelected: Character?
+                var target: Character?
                 
-                displayTeams()
                 
                 // Choix du personnage à utilisé
                 print()
                 print("Team \(x + 1):")
                 print("Choose a character from your team")
-                teams[x].describeTeamType()
+                teams[x].describeTeam()
                 
                 repeat {
                     choiceUser = inputInt()
@@ -134,62 +134,73 @@ class Game {
                     }
                 } while choiceUser != 1 && choiceUser != 2 && choiceUser != 3
                 
+                characterSelected = teams[x].characters[choiceUser - 1]
                 
-                
-                // Choix du personnage à attaquer
-                print()
-                print("Choose a character to attack")
-                teams[1 - x].describeTeamType()
-                
-                repeat {
-                    choiceUser2 = inputInt()
-                    if choiceUser2 != 1 && choiceUser2 != 2 && choiceUser2 != 3 {
-                        print("Enter a number between 1 and 3 !")
+                guard let currentCharacter = characterSelected else { return }
+                if let wizard = currentCharacter as? Wizard {
+                    
+                    print()
+                    print("Choose a character to heal")
+                    teams[x].describeTeam()
+                    
+                    repeat {
+                        choiceUser = inputInt()
+                        if choiceUser != 1 && choiceUser != 2 && choiceUser != 3 {
+                            print("Enter a number between 1 and 3 !")
+                        }
+                    } while choiceUser != 1 && choiceUser != 2 && choiceUser != 3
+                    
+                    target = teams[x].characters[choiceUser - 1]
+                    guard let currentTarget = target else { return }
+                    
+                    wizard.heal(target: currentTarget)
+                    
+                    // On affiche l'action qui vient d'être effectué
+                    if currentTarget.life != currentTarget.maxLife {
+                        print()
+                        print("\(currentCharacter.name) healed \(currentTarget.name) and give \(currentCharacter.weapon.magicPower) points of life")
                     }
-                } while choiceUser2 != 1 && choiceUser2 != 2 && choiceUser2 != 3
+
+                } else {
+                    
+                    // Choix du personnage à attaquer
+                    print()
+                    print("Choose a character to attack")
+                    teams[1 - x].describeTeam()
+                    
+                    repeat {
+                        choiceUser = inputInt()
+                        if choiceUser != 1 && choiceUser != 2 && choiceUser != 3 {
+                            print("Enter a number between 1 and 3 !")
+                        }
+                    } while choiceUser != 1 && choiceUser != 2 && choiceUser != 3
+                    
+                    target = teams[1 - x].characters[choiceUser - 1]
+                    guard let currentTarget = target else { return }
+                    
+                    
+                    currentCharacter.attack(target: currentTarget)
+                    
+                    // On affiche l'action qui vient d'être effectué
+                    if currentCharacter.life != 0 && currentTarget.life != 0 {
+                        print()
+                        print("\(currentCharacter.name) attacked \(currentTarget.name) and inflicted \(currentCharacter.weapon.damage) points of damage")
+                    }
                 
+                    if currentTarget.life == 0 {
+                        print()
+                        print("\(currentTarget.name) is dead ! \(currentCharacter.name) inflicted \(currentCharacter.weapon.damage) points of dammage and kill him")
+                    }
+                }
                 
-                
-                
-                var target  = Character(name: "", type: .Dwarf, life: 1, weapon: Sword())
-                // Switch pour déterminer la cible
-                switch choiceUser2 {
-                case 1:
-                    target = teams[1 - x].characters[0]
-                case 2:
-                    target = teams[1 - x].characters[1]
-                case 3:
-                    target = teams[1 - x].characters[2]
-                default:
+                // On calcule les points de vie de chaque équipe et on sort de la boucle si une des deux équipes arrive à 0
+                teams[x].calculateTeamLife()
+                teams[1 - x].calculateTeamLife()
+                if teams[x].teamLife == 0 || teams[1 - x].teamLife == 0 {
                     break
                 }
                 
-                //Switch pour déterminer l'attaquant
-                switch choiceUser {
-                case 1:
-                    teams[x].characters[0].attack(target: target)
-                case 2:
-                    teams[x].characters[1].attack(target: target)
-                case 3:
-                    teams[x].characters[2].attack(target: target)
-                default:
-                    break
-                }
                 
-                // On affiche l'action qui vient d'être effectué
-                print()
-                print("\(teams[x].characters[choiceUser - 1].name) attacked \(teams[1 - x].characters[choiceUser2 - 1].name) and inflicted \(teams[x].characters[choiceUser - 1].weapon.damage) points of damage")
-                
-                // Si un personnage à 0 point de vie, alors on le supprime du tableau
-                if target.life == 0 {
-                    teams[1 - x].characters.remove(at: choiceUser2 - 1)
-                    print("\(target.type) - \(target.name) is dead")
-                }
-                
-                // Trouver un moyen de sortir de la boucle for si une des deux équipes n'a plus de personnages
-                if teams[0].characters.isEmpty || teams[1].characters.isEmpty {
-                    break
-                }
             }
         
         
@@ -199,16 +210,7 @@ class Game {
     
     
 
-    
-    func displayTeams() {
-        for x in 0..<2 {
-            print()
-            print("Team \(x + 1):")
-            for character in teams[x].characters {
-                character.describeCharacter()
-            }
-        }
-    }
+
     
     
     

@@ -26,7 +26,11 @@ class Wizard: Character {
     }
     
     override func describeCharacter() {
-        print("\(type) - \(name) - Life points: \(life) - Weapon: \(weapon.name) - Magic Power: \(weapon.magicPower) ")
+        if life == 0 {
+            print("\(name) is dead !")
+        } else {
+            print("\(type) - \(name) - Life points: \(life) - Weapon: \(weapon.name) - Magic Power: \(weapon.magicPower) ")
+        }
     }
 }
 

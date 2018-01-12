@@ -45,6 +45,10 @@ class Character {
     }
     
     func describeCharacter() {
-        print("\(type) - \(name) - Life points: \(life) - Weapon: \(weapon.name) - Damage: \(weapon.damage) ")
+        if life == 0 {
+            print("\(name) is dead !")
+        } else {
+            print("\(type) - \(name) - Life points: \(life) - Weapon: \(weapon.name) - Damage: \(weapon.damage) ")
+            }
     }
 }
