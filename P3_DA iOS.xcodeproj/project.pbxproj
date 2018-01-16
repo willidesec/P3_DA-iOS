@@ -14,9 +14,7 @@
 		3F9B21241FEFB2B700D34021 /* Titan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9B21231FEFB2B700D34021 /* Titan.swift */; };
 		3F9B21261FEFB35400D34021 /* Dwarf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9B21251FEFB35400D34021 /* Dwarf.swift */; };
 		3FF6A6A4200A5B8E0033702F /* Exterminator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6A6A3200A5B8E0033702F /* Exterminator.swift */; };
-		3FF6A6A6200A5FE00033702F /* Flail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6A6A5200A5FE00033702F /* Flail.swift */; };
 		3FF6A6A8200A62550033702F /* Stick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6A6A7200A62550033702F /* Stick.swift */; };
-		3FF6A6AA200A62AB0033702F /* Chest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6A6A9200A62AB0033702F /* Chest.swift */; };
 		3FFF86821FE9584B00C5C107 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF86811FE9584B00C5C107 /* main.swift */; };
 		3FFF86891FE95DD600C5C107 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF86881FE95DD600C5C107 /* Character.swift */; };
 		3FFF868D1FE9664700C5C107 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF868C1FE9664700C5C107 /* Weapon.swift */; };
@@ -46,9 +44,7 @@
 		3F9B21231FEFB2B700D34021 /* Titan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Titan.swift; sourceTree = "<group>"; };
 		3F9B21251FEFB35400D34021 /* Dwarf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dwarf.swift; sourceTree = "<group>"; };
 		3FF6A6A3200A5B8E0033702F /* Exterminator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exterminator.swift; sourceTree = "<group>"; };
-		3FF6A6A5200A5FE00033702F /* Flail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flail.swift; sourceTree = "<group>"; };
 		3FF6A6A7200A62550033702F /* Stick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stick.swift; sourceTree = "<group>"; };
-		3FF6A6A9200A62AB0033702F /* Chest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chest.swift; sourceTree = "<group>"; };
 		3FFF867E1FE9584B00C5C107 /* P3_DA iOS */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "P3_DA iOS"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FFF86811FE9584B00C5C107 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		3FFF86881FE95DD600C5C107 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
@@ -85,9 +81,7 @@
 		3FF6A6AB200A62B60033702F /* Chest */ = {
 			isa = PBXGroup;
 			children = (
-				3FF6A6A9200A62AB0033702F /* Chest.swift */,
 				3FF6A6A3200A5B8E0033702F /* Exterminator.swift */,
-				3FF6A6A5200A5FE00033702F /* Flail.swift */,
 				3FF6A6A7200A62550033702F /* Stick.swift */,
 			);
 			path = Chest;
@@ -192,7 +186,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FF6A6A6200A5FE00033702F /* Flail.swift in Sources */,
 				3FFF868F1FE968DB00C5C107 /* Sword.swift in Sources */,
 				3FFF86911FE969DC00C5C107 /* Wand.swift in Sources */,
 				3F9B21261FEFB35400D34021 /* Dwarf.swift in Sources */,
@@ -206,7 +199,6 @@
 				3FF6A6A4200A5B8E0033702F /* Exterminator.swift in Sources */,
 				3FFF86931FEBFBCD00C5C107 /* Hammer.swift in Sources */,
 				3F9B21201FEFB1E600D34021 /* Warrior.swift in Sources */,
-				3FF6A6AA200A62AB0033702F /* Chest.swift in Sources */,
 				3FFF86891FE95DD600C5C107 /* Character.swift in Sources */,
 				3F9B21221FEFB24100D34021 /* Wizard.swift in Sources */,
 			);

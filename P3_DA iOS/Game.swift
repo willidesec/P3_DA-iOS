@@ -85,12 +85,12 @@ class Game {
             var characterName = ""
                 repeat {
                     characterName = inputString()
-                    if uniqueCharacterNamesArray.contains(characterName) {
-                        print("Ce nom")
-                        characterName = ""
-                    } else {
-                        uniqueCharacterNamesArray.append(characterName)
-                    }
+//                    if uniqueCharacterNamesArray.contains(characterName) {
+//                        print("Ce nom")
+//                        characterName = ""
+//                    } else {
+//                        uniqueCharacterNamesArray.append(characterName)
+//                    }
                 } while characterName == ""
             
             
@@ -146,38 +146,12 @@ class Game {
                 guard let currentCharacter = characterSelected else { return }
                 
                 
-                
                 // Apparition du coffre magique
-                let randomNumber = arc4random_uniform(101)
+                let randomNumber = arc4random_uniform(11)
                 if randomNumber <= 10 {
-                    print()
-                    print("A Magic Chest appear !!")
-                    print("It contains a lot of powerful weapons !")
-                    print("Press Enter to pick one.")
-                    
-                    let magicChest = Chest()
-                    if let wizard = currentCharacter as? Wizard {
-                        repeat {
-                            let randomIndex = Int(arc4random_uniform(UInt32(magicChest.chest.count)))
-                            currentCharacter.weapon = magicChest.chest[randomIndex]
-                        } while wizard.weapon.type != weaponType.Heal
-                        
-                        print()
-                        print("\(currentCharacter.name) is now equiped with the \(currentCharacter.weapon.name) which heal \(currentCharacter.weapon.magicPower) points of life !")
-
-                    } else {
-                        repeat {
-                            let randomIndex = Int(arc4random_uniform(UInt32(magicChest.chest.count)))
-                            currentCharacter.weapon = magicChest.chest[randomIndex]
-                        } while currentCharacter.weapon.type != weaponType.Attack
-                        
-                        print()
-                        print("\(currentCharacter.name) is now equiped with the \(currentCharacter.weapon.name) which inflicte \(currentCharacter.weapon.damage) damage !")
-
-                    }
-                    
-                    
+                    magicChest(character: currentCharacter)
                 }
+                
                 
                 // Si le personnage sélectionné est un mage
                 if let wizard = currentCharacter as? Wizard {
@@ -244,6 +218,26 @@ class Game {
             }
     }
     
+    
+    // Fonction du Coffre Magique
+    func magicChest(character: Character) {
+        print()
+        print("A Magic Chest appear !!")
+        print("It contains a lot of powerful weapons !")
+        
+        if let wizard = character as? Wizard {
+            wizard.weapon = Stick()
+            
+            print()
+            print("\(character.name) is now equiped with the \(character.weapon.name) which heal \(character.weapon.magicPower) points of life !")
+            
+        } else {
+            character.weapon = Exterminator()
+            
+            print()
+            print("\(character.name) is now equiped with the \(character.weapon.name) which inflicte \(character.weapon.damage) damage !")
+        }
+    }
     
     
     // Enregistre ce que l'utilisateur tape dans la console et le transforme en Int
