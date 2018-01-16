@@ -10,7 +10,6 @@ import Foundation
 
 class Team {
     var characters = [Character]()
-    var teamLife = 0
     
     
     func describeTeam() {
@@ -22,11 +21,12 @@ class Team {
         }
     }
     
-    func calculateTeamLife() {
-        teamLife = 0
+    func calculateTeamLife() -> Int {
+        var teamLife = 0
         for character in characters {
             teamLife += character.life
         }
+        return teamLife
     }
 }
 

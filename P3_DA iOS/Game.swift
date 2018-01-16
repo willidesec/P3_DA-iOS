@@ -28,7 +28,7 @@ class Game {
         // On lance le combat en tour par tour
         teamsFight()
         
-        if teams[0].teamLife > 0 {
+        if teams[0].calculateTeamLife() > 0 {
             print()
             print("The Winner is the Team 1 !")
         } else {
@@ -127,7 +127,7 @@ class Game {
         print("Fight !")
         repeat {
             characterFight()
-        } while teams[0].teamLife != 0 && teams[1].teamLife != 0
+        } while teams[0].calculateTeamLife() != 0 && teams[1].calculateTeamLife() != 0
     }
     
     
@@ -222,9 +222,7 @@ class Game {
                 }
                 
                 // On calcule les points de vie de chaque équipe et on sort de la boucle si une des deux équipes arrive à 0
-                teams[x].calculateTeamLife()
-                teams[1 - x].calculateTeamLife()
-                if teams[x].teamLife == 0 || teams[1 - x].teamLife == 0 {
+                if teams[x].calculateTeamLife() == 0 || teams[1 - x].calculateTeamLife() == 0 {
                     return
                 }
             }
