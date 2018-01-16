@@ -19,28 +19,14 @@ class Game {
         print("Only one winner")
         print()
         
-        for i in 0..<numberOfTeams {
-            print()
-            print("Creation of Team \(i + 1)")
-            let team = Team()
-            team.characters = createCharacter()
-            teams.append(team)
-        }
+        // Création des deux équipes
+        createTeams()
         
-        var x = 1
-        for team in teams {
-            print()
-            print("Composition of Team \(x)")
-            team.describeTeam()
-            x += 1
-        }
+        // Description des deux équipes
+        teamsComposition()
         
         // On lance le combat en tour par tour
-        print()
-        print("Fight !")
-        repeat {
-            combat()
-        } while teams[0].teamLife != 0 && teams[1].teamLife != 0
+        teamsFight()
         
         if teams[0].teamLife > 0 {
             print()
@@ -55,7 +41,25 @@ class Game {
         
     }
     
-
+    func createTeams() {
+        for i in 0..<numberOfTeams {
+            print()
+            print("Creation of Team \(i + 1)")
+            let team = Team()
+            team.characters = createCharacter()
+            teams.append(team)
+        }
+    }
+    
+    func teamsComposition() {
+        var x = 1
+        for team in teams {
+            print()
+            print("Composition of Team \(x)")
+            team.describeTeam()
+            x += 1
+        }
+    }
     
     func createCharacter() -> [Character] {
         var choiceUser = 0
@@ -118,8 +122,16 @@ class Game {
         return characterList
     }
 
+    func teamsFight() {
+        print()
+        print("Fight !")
+        repeat {
+            characterFight()
+        } while teams[0].teamLife != 0 && teams[1].teamLife != 0
+    }
     
-    func combat() {
+    
+    func characterFight() {
     
             for x in 0..<2 {
             
