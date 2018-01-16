@@ -28,18 +28,13 @@ class Game {
         // On lance le combat en tour par tour
         teamsFight()
         
-        if teams[0].calculateTeamLife() > 0 {
-            print()
-            print("The Winner is the Team 1 !")
-        } else {
-            print()
-            print("The Winner is the Team 2 !")
-        }
-        
-        print()
-        print("End of the game !")
-        
+        // On affiche le gagant
+        displayWinner()
     }
+    
+    
+    
+    
     
     func createTeams() {
         for i in 0..<numberOfTeams {
@@ -247,6 +242,20 @@ class Game {
             print()
             print("\(character.name) is now equiped with the \(character.weapon.name) which inflicte \(character.weapon.damage) damage !")
         }
+    }
+    
+    // Fonction qui affiche le gagnant de la partie
+    func displayWinner() {
+        if teams[0].calculateTeamLife() > 0 {
+            print()
+            print("The Winner is the Team 1 !")
+        } else {
+            print()
+            print("The Winner is the Team 2 !")
+        }
+        
+        print()
+        print("End of the game !")
     }
     
     
