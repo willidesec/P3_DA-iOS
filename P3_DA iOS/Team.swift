@@ -16,7 +16,8 @@ class Team {
     func describeTeam() {
         var x = 1
         for character in characters {
-            print("\(x) - "); character.describeCharacter()
+            print("\(x).", terminator: " ")
+            character.describeCharacter()
             x += 1
         }
     }
@@ -26,7 +27,6 @@ class Team {
         for character in characters {
             teamLife += character.life
         }
-        print(teamLife)
     }
 }
 

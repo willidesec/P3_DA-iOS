@@ -11,6 +11,7 @@ import Foundation
 class Game {
     var teams = [Team]()
     let numberOfTeams = 2
+    var uniqueCharacterNamesArray = [String]()
     
     func start() {
         print("Welcome in DEATH GAME !")
@@ -84,6 +85,12 @@ class Game {
             var characterName = ""
                 repeat {
                     characterName = inputString()
+                    if uniqueCharacterNamesArray.contains(characterName) {
+                        print("Ce nom")
+                        characterName = ""
+                    } else {
+                        uniqueCharacterNamesArray.append(characterName)
+                    }
                 } while characterName == ""
             
             
@@ -137,8 +144,43 @@ class Game {
                 characterSelected = teams[x].characters[choiceUser - 1]
                 
                 guard let currentCharacter = characterSelected else { return }
-                if let wizard = currentCharacter as? Wizard {
+                
+                
+                
+                // Apparition du coffre magique
+                let randomNumber = arc4random_uniform(101)
+                if randomNumber <= 10 {
+                    print()
+                    print("A Magic Chest appear !!")
+                    print("It contains a lot of powerful weapons !")
+                    print("Press Enter to pick one.")
                     
+                    let magicChest = Chest()
+                    if let wizard = currentCharacter as? Wizard {
+                        repeat {
+                            let randomIndex = Int(arc4random_uniform(UInt32(magicChest.chest.count)))
+                            currentCharacter.weapon = magicChest.chest[randomIndex]
+                        } while wizard.weapon.type != weaponType.Heal
+                        
+                        print()
+                        print("\(currentCharacter.name) is now equiped with the \(currentCharacter.weapon.name) which heal \(currentCharacter.weapon.magicPower) points of life !")
+
+                    } else {
+                        repeat {
+                            let randomIndex = Int(arc4random_uniform(UInt32(magicChest.chest.count)))
+                            currentCharacter.weapon = magicChest.chest[randomIndex]
+                        } while currentCharacter.weapon.type != weaponType.Attack
+                        
+                        print()
+                        print("\(currentCharacter.name) is now equiped with the \(currentCharacter.weapon.name) which inflicte \(currentCharacter.weapon.damage) damage !")
+
+                    }
+                    
+                    
+                }
+                
+                // Si le personnage sélectionné est un mage
+                if let wizard = currentCharacter as? Wizard {
                     print()
                     print("Choose a character to heal")
                     teams[x].describeTeam()
@@ -197,21 +239,10 @@ class Game {
                 teams[x].calculateTeamLife()
                 teams[1 - x].calculateTeamLife()
                 if teams[x].teamLife == 0 || teams[1 - x].teamLife == 0 {
-                    break
+                    return
                 }
-                
-                
             }
-        
-        
     }
-    
-    
-    
-    
-
-
-    
     
     
     
@@ -228,6 +259,7 @@ class Game {
         return data
     }
     
-    
+
 }
+
 

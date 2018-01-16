@@ -10,6 +10,6 @@ import Foundation
 
 class Sword: Weapon {
     init() {
-        super.init(name: "Sword", damage: 10, magicPower: 0)
+        super.init(name: "Sword", damage: 10, magicPower: 0, type: .Attack)
     }
 }

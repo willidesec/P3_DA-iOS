@@ -12,10 +12,16 @@ class Weapon {
     var name: String
     var damage: Int
     var magicPower: Int
+    let type: weaponType
     
-    init(name: String, damage: Int, magicPower: Int) {
+    init(name: String, damage: Int, magicPower: Int, type: weaponType) {
         self.name = name
         self.damage = damage
         self.magicPower = magicPower
+        self.type = type
     }
+}
+
+enum weaponType {
+    case Attack, Heal
 }
