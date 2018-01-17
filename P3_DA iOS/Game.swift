@@ -12,6 +12,7 @@ class Game {
     var teams = [Team]()
     let numberOfTeams = 2
     var uniqueCharacterNamesArray = [String]()
+    var numberOfLaps = 0
     
     func start() {
         print("Welcome in DEATH GAME !")
@@ -30,6 +31,9 @@ class Game {
         
         // On affiche le gagant
         displayWinner()
+        
+        // On affiche les statistiques du jeu
+        displayStatistics()
     }
     
     
@@ -85,7 +89,7 @@ class Game {
                 repeat {
                     characterName = inputString()
 //                    if uniqueCharacterNamesArray.contains(characterName) {
-//                        print("Ce nom")
+                    //                        print("This name is already used by another character. Choose a new one:")
 //                        characterName = ""
 //                    } else {
 //                        uniqueCharacterNamesArray.append(characterName)
@@ -122,6 +126,7 @@ class Game {
         print("Fight !")
         repeat {
             characterFight()
+            numberOfLaps += 1
         } while teams[0].calculateTeamLife() != 0 && teams[1].calculateTeamLife() != 0
     }
     
@@ -256,6 +261,11 @@ class Game {
         
         print()
         print("End of the game !")
+    }
+    
+    func displayStatistics() {
+        print()
+        print("Number of laps: \(numberOfLaps)")
     }
     
     
