@@ -23,10 +23,22 @@ class Game {
         print("============================================================================")
         
         // Création des deux équipes
-        createTeams()
+        for i in 0..<numberOfTeams {
+            print()
+            print("Creation of Team \(i + 1)")
+            createTeam()
+        }
         
         // Description des deux équipes
-        displayTeamsComposition()
+        var x = 1
+        for team in teams {
+            print()
+            print("============================================================================")
+            print("                       Composition of Team \(x)")
+            print("============================================================================")
+            team.describeTeam()
+            x += 1
+        }
         
         // On lance le combat en tour par tour
         teamsFight()
@@ -37,32 +49,14 @@ class Game {
         // On affiche les statistiques du jeu
         displayStatistics()
     }
+  
     
-    
-    
-    
-    
-    func createTeams() {
-        for i in 0..<numberOfTeams {
-            print()
-            print("Creation of Team \(i + 1)")
+    func createTeam() {
             let team = Team()
             team.characters = createCharacter()
             teams.append(team)
-        }
     }
     
-    func displayTeamsComposition() {
-        var x = 1
-        for team in teams {
-            print()
-            print("============================================================================")
-            print("                       Composition of Team \(x)")
-            print("============================================================================")
-            team.describeTeam()
-            x += 1
-        }
-    }
     
     func createCharacter() -> [Character] {
         var choiceUser = 0
@@ -166,10 +160,7 @@ class Game {
                 
                 
                 // Apparition du coffre magique
-                let randomNumber = arc4random_uniform(101)
-                if randomNumber <= 10 {
-                    magicChest(character: currentCharacter)
-                }
+                magicChest(character: currentCharacter)
                 
                 
                 // Si le personnage sélectionné est un mage
@@ -238,23 +229,26 @@ class Game {
     
     // Fonction du Coffre Magique
     func magicChest(character: Character) {
-        print()
-        print("============================================================================")
-        print("                       🌟 A Magic Chest appear 🌟")
-        print("                 It contains a lot of powerful weapons !")
-        print("                                   ⚡️")
-        
-        if let wizard = character as? Wizard {
-            wizard.weapon = Stick()
+        let randomNumber = arc4random_uniform(101)
+        if randomNumber <= 10 {
+            print()
+            print("============================================================================")
+            print("                       🌟 A Magic Chest appear 🌟")
+            print("                 It contains a lot of powerful weapons !")
+            print("                                   ⚡️")
             
-            print("      \(character.name) is now equiped with the \(character.weapon.name) which heal \(character.weapon.magicPower) points of life !")
-            
-        } else {
-            character.weapon = Exterminator()
-            
-            print("      \(character.name) is now equiped with the \(character.weapon.name) which inflicte \(character.weapon.damage) damage !")
+            if let wizard = character as? Wizard {
+                wizard.weapon = Stick()
+                
+                print("      \(character.name) is now equiped with the \(character.weapon.name) which heal \(character.weapon.magicPower) points of life !")
+                
+            } else {
+                character.weapon = Exterminator()
+                
+                print("      \(character.name) is now equiped with the \(character.weapon.name) which inflicte \(character.weapon.damage) damage !")
+            }
+            print("============================================================================")
         }
-        print("============================================================================")
     }
     
     // Fonction qui affiche le gagnant de la partie
