@@ -13,18 +13,20 @@ class Game {
     let numberOfTeams = 2
     var uniqueCharacterNamesArray = [String]()
     var numberOfLaps = 0
+    let startGameDate = NSDate()
     
     func start() {
-        print("Welcome in DEATH GAME !")
-        print("A two team Deathmatch")
-        print("Only one winner")
-        print()
+        print("============================================================================")
+        print("                      ⚔️  Welcome in DEATH GAME !  ⚔️")
+        print("                           A two team Deathmatch")
+        print("                              Only one winner")
+        print("============================================================================")
         
         // Création des deux équipes
         createTeams()
         
         // Description des deux équipes
-        teamsComposition()
+        displayTeamsComposition()
         
         // On lance le combat en tour par tour
         teamsFight()
@@ -50,11 +52,13 @@ class Game {
         }
     }
     
-    func teamsComposition() {
+    func displayTeamsComposition() {
         var x = 1
         for team in teams {
             print()
-            print("Composition of Team \(x)")
+            print("============================================================================")
+            print("                       Composition of Team \(x)")
+            print("============================================================================")
             team.describeTeam()
             x += 1
         }
@@ -63,12 +67,13 @@ class Game {
     func createCharacter() -> [Character] {
         var choiceUser = 0
         var characterList = [Character]()
+        let rankingArray = ["first", "second", "third"]
         
         // Une boucle pour créer trois personnages
         for i in 0..<3 {
         
             print()
-            print("Choose \(3 - i) characters:")
+            print("Choose your \(rankingArray[i]) characters:")
             print("1 - Warrior")
             print("2 - Wizard")
             print("3 - Titan")
@@ -88,12 +93,12 @@ class Game {
             var characterName = ""
                 repeat {
                     characterName = inputString()
-//                    if uniqueCharacterNamesArray.contains(characterName) {
-                    //                        print("This name is already used by another character. Choose a new one:")
-//                        characterName = ""
-//                    } else {
-//                        uniqueCharacterNamesArray.append(characterName)
-//                    }
+                    if uniqueCharacterNamesArray.contains(characterName) {
+                                            print("This name is already used by another character. Choose a new one:")
+                        characterName = ""
+                    } else {
+                        uniqueCharacterNamesArray.append(characterName)
+                    }
                 } while characterName == ""
             
             
@@ -123,7 +128,9 @@ class Game {
 
     func teamsFight() {
         print()
-        print("Fight !")
+        print("============================================================================")
+        print("                            ⚔️ Fight ! ⚔️")
+        print("============================================================================")
         repeat {
             characterFight()
             numberOfLaps += 1
@@ -159,7 +166,7 @@ class Game {
                 
                 
                 // Apparition du coffre magique
-                let randomNumber = arc4random_uniform(11)
+                let randomNumber = arc4random_uniform(101)
                 if randomNumber <= 10 {
                     magicChest(character: currentCharacter)
                 }
@@ -232,21 +239,22 @@ class Game {
     // Fonction du Coffre Magique
     func magicChest(character: Character) {
         print()
-        print("A Magic Chest appear !!")
-        print("It contains a lot of powerful weapons !")
+        print("============================================================================")
+        print("                       🌟 A Magic Chest appear 🌟")
+        print("                 It contains a lot of powerful weapons !")
+        print("                                   ⚡️")
         
         if let wizard = character as? Wizard {
             wizard.weapon = Stick()
             
-            print()
-            print("\(character.name) is now equiped with the \(character.weapon.name) which heal \(character.weapon.magicPower) points of life !")
+            print("      \(character.name) is now equiped with the \(character.weapon.name) which heal \(character.weapon.magicPower) points of life !")
             
         } else {
             character.weapon = Exterminator()
             
-            print()
-            print("\(character.name) is now equiped with the \(character.weapon.name) which inflicte \(character.weapon.damage) damage !")
+            print("      \(character.name) is now equiped with the \(character.weapon.name) which inflicte \(character.weapon.damage) damage !")
         }
+        print("============================================================================")
     }
     
     // Fonction qui affiche le gagnant de la partie
@@ -266,6 +274,18 @@ class Game {
     func displayStatistics() {
         print()
         print("Number of laps: \(numberOfLaps)")
+        
+        print(showTimer(startGameDate: startGameDate))
+
+
+    }
+    
+    func showTimer(startGameDate: NSDate) -> String {
+        let interval = NSDate().timeIntervalSince(startGameDate as Date)
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .short
+        guard let timer = formatter.string(from: interval) else { return "" }
+        return timer
     }
     
     
