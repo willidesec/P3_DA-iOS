@@ -13,7 +13,7 @@ class Game {
     let numberOfTeams = 2
     var uniqueCharacterNamesArray = [String]()
     var numberOfLaps = 0
-    let startGameDate = NSDate()
+    var startGameDate = NSDate()
     
     func start() {
         print("============================================================================")
@@ -88,7 +88,7 @@ class Game {
                 repeat {
                     characterName = inputString()
                     if uniqueCharacterNamesArray.contains(characterName) {
-                                            print("This name is already used by another character. Choose a new one:")
+                        print("This name is already used by another character. Choose a new one:")
                         characterName = ""
                     } else {
                         uniqueCharacterNamesArray.append(characterName)
@@ -140,7 +140,6 @@ class Game {
                 var characterSelected: Character?
                 var target: Character?
                 
-                
                 // Choix du personnage à utilisé
                 print()
                 print("Team \(x + 1):")
@@ -158,10 +157,8 @@ class Game {
                 
                 guard let currentCharacter = characterSelected else { return }
                 
-                
                 // Apparition du coffre magique
                 magicChest(character: currentCharacter)
-                
                 
                 // Si le personnage sélectionné est un mage
                 if let wizard = currentCharacter as? Wizard {
@@ -204,7 +201,6 @@ class Game {
                     target = teams[1 - x].characters[choiceUser - 1]
                     guard let currentTarget = target else { return }
                     
-                    
                     currentCharacter.attack(target: currentTarget)
                     
                     // On affiche l'action qui vient d'être effectué
@@ -225,8 +221,7 @@ class Game {
                 }
             }
     }
-    
-    
+
     // Fonction du Coffre Magique
     func magicChest(character: Character) {
         let randomNumber = arc4random_uniform(101)
@@ -239,12 +234,10 @@ class Game {
             
             if let wizard = character as? Wizard {
                 wizard.weapon = Stick()
-                
                 print("      \(character.name) is now equiped with the \(character.weapon.name) which heal \(character.weapon.magicPower) points of life !")
                 
             } else {
                 character.weapon = Exterminator()
-                
                 print("      \(character.name) is now equiped with the \(character.weapon.name) which inflicte \(character.weapon.damage) damage !")
             }
             print("============================================================================")
@@ -255,22 +248,27 @@ class Game {
     func displayWinner() {
         if teams[0].calculateTeamLife() > 0 {
             print()
-            print("The Winner is the Team 1 !")
+            print("============================================================================")
+            print("                   👑 The Winner is the Team 1 ! 👑")
+            print("============================================================================")
         } else {
             print()
-            print("The Winner is the Team 2 !")
+            print("============================================================================")
+            print("                   👑 The Winner is the Team 2 ! 👑")
+            print("============================================================================")
         }
         
         print()
-        print("End of the game !")
+        print("                           End of the game !")
     }
     
     func displayStatistics() {
         print()
-        print("Number of laps: \(numberOfLaps)")
-        
-        print(showTimer(startGameDate: startGameDate))
-
+        print("============================================================================")
+        print("                           Game statistics")
+        print("                          Number of laps: \(numberOfLaps)")
+        print("                     Duration of the game: \(showTimer(startGameDate: startGameDate))")
+        print("============================================================================")
 
     }
     
