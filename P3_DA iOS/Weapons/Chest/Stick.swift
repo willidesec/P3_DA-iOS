@@ -11,6 +11,6 @@ import Foundation
 class Stick: Weapon {
     
     init() {
-        super.init(name: "Stick", damage: 0, magicPower: 25, type: .Heal)
+        super.init(name: "Stick", damage: 0, magicPower: 35, type: .Heal)
     }
 }
