@@ -9,9 +9,8 @@
 import Foundation
 
 class Wand: Weapon {
-    
     init() {
-        super.init(name: "Wand", damage: 0, magicPower: 20, type:.Heal)
+        super.init(name: "Wand", damage: 0, magicPower: 20, type:.heal)
     }    
 }
 

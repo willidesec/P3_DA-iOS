@@ -10,7 +10,7 @@ import Foundation
 
 class Titan: Character {
     init(name: String) {
-        super.init(name: name, type: .Titan, life: 150, weapon: Hammer())
+        super.init(name: name, type: .titan, life: 150, weapon: Hammer())
     }
 }
 

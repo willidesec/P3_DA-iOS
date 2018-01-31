@@ -9,10 +9,12 @@
 import Foundation
 
 class Wizard: Character {
+    // MARK: - Init
     init(name: String) {
-        super.init(name: name, type: .Wizard, life: 90, weapon: Wand())
+        super.init(name: name, type: .wizard, life: 90, weapon: Wand())
     }
     
+    // MARK: - Methods
     override func attack(target: Character) {
         print("The Wizard can't attack")
     }

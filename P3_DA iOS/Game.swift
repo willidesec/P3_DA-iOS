@@ -9,117 +9,61 @@
 import Foundation
 
 class Game {
+    // MARK: - Vars
     var teams = [Team]()
     let numberOfTeams = 2
-    var uniqueCharacterNamesArray = [String]()
     var numberOfLaps = 0
     var startGameDate = NSDate()
     
+    // MARK: - Methods
+    
+    // A function that launch the game
     func start() {
+
+        welcomeMessage()
+        
+        // Creation of two teams
+        for i in 0..<numberOfTeams {
+            print()
+            print("Creation of Team \(i + 1)")
+            let team = createTeam()
+            teams.append(team)
+        }
+        
+        // Description of the two teams
+        for i in 0..<teams.count {
+            let currentTeam = teams[i]
+            print()
+            print("============================================================================")
+            print("                       Composition of Team \(i + 1)")
+            print("============================================================================")
+            currentTeam.describeTeam()
+        }
+        
+        // Launch the fight
+        teamsFight()
+        // Display the Winner
+        displayWinner()
+        // Display the statistics of the game
+        displayStatistics()
+    }
+    
+    // A function that create a Team
+    func createTeam() -> Team {
+        let team = Team()
+        team.createCharacters()
+        return team
+    }
+    
+    func welcomeMessage() {
         print("============================================================================")
         print("                      ⚔️  Welcome in DEATH GAME !  ⚔️")
         print("                           A two team Deathmatch")
         print("                              Only one winner")
         print("============================================================================")
-        
-        // Création des deux équipes
-        for i in 0..<numberOfTeams {
-            print()
-            print("Creation of Team \(i + 1)")
-            createTeam()
-        }
-        
-        // Description des deux équipes
-        var x = 1
-        for team in teams {
-            print()
-            print("============================================================================")
-            print("                       Composition of Team \(x)")
-            print("============================================================================")
-            team.describeTeam()
-            x += 1
-        }
-        
-        // On lance le combat en tour par tour
-        teamsFight()
-        
-        // On affiche le gagant
-        displayWinner()
-        
-        // On affiche les statistiques du jeu
-        displayStatistics()
-    }
-  
-    
-    func createTeam() {
-            let team = Team()
-            team.characters = createCharacter()
-            teams.append(team)
     }
     
-    
-    func createCharacter() -> [Character] {
-        var choiceUser = 0
-        var characterList = [Character]()
-        let rankingArray = ["first", "second", "third"]
-        
-        // Une boucle pour créer trois personnages
-        for i in 0..<3 {
-        
-            print()
-            print("Choose your \(rankingArray[i]) characters:")
-            print("1 - Warrior")
-            print("2 - Wizard")
-            print("3 - Titan")
-            print("4 - Dwarf")
-        
-            repeat {
-                choiceUser = inputInt()
-                if choiceUser != 1 && choiceUser != 2 && choiceUser != 3 && choiceUser != 4 {
-                    print("Enter a number between 1 and 4 !")
-                }
-            } while choiceUser != 1 && choiceUser != 2 && choiceUser != 3 && choiceUser != 4
-     
-        
-            // Pour que l'utitlisateur indique le nom de son personnage
-            print()
-            print("Enter a name for your character:")
-            var characterName = ""
-                repeat {
-                    characterName = inputString()
-                    if uniqueCharacterNamesArray.contains(characterName) {
-                        print("This name is already used by another character. Choose a new one:")
-                        characterName = ""
-                    } else {
-                        uniqueCharacterNamesArray.append(characterName)
-                    }
-                } while characterName == ""
-            
-            
-            switch choiceUser {
-            case 1:
-                let warrior = Warrior(name: characterName)
-                characterList.append(warrior)
-            case 2:
-                let wizard = Wizard(name: characterName)
-                characterList.append(wizard)
-            case 3:
-                let titan = Titan(name: characterName)
-                characterList.append(titan)
-            case 4:
-                let dwarf = Dwarf(name: characterName)
-                characterList.append(dwarf)
-            default:
-                break
-            }
-        
-            print()
-            print("You add a \(characterList[i].type) to your team called \(characterList[i].name)")
-
-        }
-        return characterList
-    }
-
+    // A loop which repeat the character's fight until a team die
     func teamsFight() {
         print()
         print("============================================================================")
@@ -131,54 +75,54 @@ class Game {
         } while teams[0].calculateTeamLife() != 0 && teams[1].calculateTeamLife() != 0
     }
     
-    
+    // A function that give a action for each player once
     func characterFight() {
     
-            for x in 0..<2 {
+            for i in 0..<2 {
             
                 var choiceUser = 0
                 var characterSelected: Character?
                 var target: Character?
                 
-                // Choix du personnage à utilisé
+                // Choice of the character to use
                 print()
-                print("Team \(x + 1):")
+                print("Team \(i + 1):")
                 print("Choose a character from your team")
-                teams[x].describeTeam()
+                teams[i].describeTeam()
                 
                 repeat {
-                    choiceUser = inputInt()
+                    choiceUser = Input.inputInt()
                     if choiceUser != 1 && choiceUser != 2 && choiceUser != 3 {
                         print("Enter a number between 1 and 3 !")
                     }
                 } while choiceUser != 1 && choiceUser != 2 && choiceUser != 3
                 
-                characterSelected = teams[x].characters[choiceUser - 1]
+                characterSelected = teams[i].characters[choiceUser - 1]
                 
                 guard let currentCharacter = characterSelected else { return }
                 
-                // Apparition du coffre magique
+                // Apparition of the magic chest
                 magicChest(character: currentCharacter)
                 
-                // Si le personnage sélectionné est un mage
+                // If the current character is a mage
                 if let wizard = currentCharacter as? Wizard {
                     print()
                     print("Choose a character to heal")
-                    teams[x].describeTeam()
+                    teams[i].describeTeam()
                     
                     repeat {
-                        choiceUser = inputInt()
+                        choiceUser = Input.inputInt()
                         if choiceUser != 1 && choiceUser != 2 && choiceUser != 3 {
                             print("Enter a number between 1 and 3 !")
                         }
                     } while choiceUser != 1 && choiceUser != 2 && choiceUser != 3
                     
-                    target = teams[x].characters[choiceUser - 1]
+                    target = teams[i].characters[choiceUser - 1]
                     guard let currentTarget = target else { return }
                     
                     wizard.heal(target: currentTarget)
                     
-                    // On affiche l'action qui vient d'être effectué
+                    // Display the action that has just been performed
                     if currentTarget.life != currentTarget.maxLife {
                         print()
                         print("\(currentCharacter.name) healed \(currentTarget.name) and give \(currentCharacter.weapon.magicPower) points of life")
@@ -186,24 +130,24 @@ class Game {
 
                 } else {
                     
-                    // Choix du personnage à attaquer
+                    // Choice of the character to attack
                     print()
                     print("Choose a character to attack")
-                    teams[1 - x].describeTeam()
+                    teams[1 - i].describeTeam()
                     
                     repeat {
-                        choiceUser = inputInt()
+                        choiceUser = Input.inputInt()
                         if choiceUser != 1 && choiceUser != 2 && choiceUser != 3 {
                             print("Enter a number between 1 and 3 !")
                         }
                     } while choiceUser != 1 && choiceUser != 2 && choiceUser != 3
                     
-                    target = teams[1 - x].characters[choiceUser - 1]
+                    target = teams[1 - i].characters[choiceUser - 1]
                     guard let currentTarget = target else { return }
                     
                     currentCharacter.attack(target: currentTarget)
                     
-                    // On affiche l'action qui vient d'être effectué
+                    // Display the action that has just been performed
                     if currentCharacter.life != 0 && currentTarget.life != 0 {
                         print()
                         print("\(currentCharacter.name) attacked \(currentTarget.name) and inflicted \(currentCharacter.weapon.damage) points of damage")
@@ -215,14 +159,14 @@ class Game {
                     }
                 }
                 
-                // On calcule les points de vie de chaque équipe et on sort de la boucle si une des deux équipes arrive à 0
-                if teams[x].calculateTeamLife() == 0 || teams[1 - x].calculateTeamLife() == 0 {
+                // We calculate the life of each team and we leave the loop if one of the two teams reaches 0
+                if teams[i].calculateTeamLife() == 0 || teams[1 - i].calculateTeamLife() == 0 {
                     return
                 }
             }
     }
 
-    // Fonction du Coffre Magique
+    // A function that appear the Magic Chest
     func magicChest(character: Character) {
         let randomNumber = arc4random_uniform(101)
         if randomNumber <= 10 {
@@ -244,7 +188,7 @@ class Game {
         }
     }
     
-    // Fonction qui affiche le gagnant de la partie
+    // A function that display the Winner
     func displayWinner() {
         if teams[0].calculateTeamLife() > 0 {
             print()
@@ -262,6 +206,7 @@ class Game {
         print("                           End of the game !")
     }
     
+    // A function that display the statistics of the game
     func displayStatistics() {
         print()
         print("============================================================================")
@@ -269,9 +214,9 @@ class Game {
         print("                          Number of laps: \(numberOfLaps)")
         print("                     Duration of the game: \(showTimer(startGameDate: startGameDate))")
         print("============================================================================")
-
     }
     
+    // A function to calculate the duration of the game
     func showTimer(startGameDate: NSDate) -> String {
         let interval = NSDate().timeIntervalSince(startGameDate as Date)
         let formatter = DateComponentsFormatter()
@@ -279,22 +224,6 @@ class Game {
         guard let timer = formatter.string(from: interval) else { return "" }
         return timer
     }
-    
-    
-    // Enregistre ce que l'utilisateur tape dans la console et le transforme en Int
-    func inputInt() -> Int {
-        guard let data = readLine() else { return 0 }
-        guard let dataToInt = Int(data) else { return 0 }
-        return dataToInt
-    }
-    
-    // Enregistre ce que l'utilisateur tape dans la console et le transforme en String
-    func inputString() -> String {
-        guard let data = readLine() else { return "" }
-        return data
-    }
-    
-
 }
 
 

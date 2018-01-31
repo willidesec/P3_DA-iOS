@@ -9,8 +9,7 @@
 import Foundation
 
 class Exterminator: Weapon {
-    
     init() {
-        super.init(name: "Exterminator", damage: 40, magicPower: 0, type: .Attack)
+        super.init(name: "Exterminator", damage: 40, magicPower: 0, type: .attack)
     }
 }

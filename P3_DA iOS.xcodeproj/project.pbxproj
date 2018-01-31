@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3F688F5C1FF26E48009E245F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F688F5B1FF26E48009E245F /* Game.swift */; };
 		3F688F5E1FF26E87009E245F /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F688F5D1FF26E87009E245F /* Team.swift */; };
+		3F85E891201F48930083DA00 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F85E890201F48930083DA00 /* Input.swift */; };
 		3F9B21201FEFB1E600D34021 /* Warrior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9B211F1FEFB1E600D34021 /* Warrior.swift */; };
 		3F9B21221FEFB24100D34021 /* Wizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9B21211FEFB24100D34021 /* Wizard.swift */; };
 		3F9B21241FEFB2B700D34021 /* Titan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9B21231FEFB2B700D34021 /* Titan.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		3F688F5B1FF26E48009E245F /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		3F688F5D1FF26E87009E245F /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		3F85E890201F48930083DA00 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
 		3F9B211F1FEFB1E600D34021 /* Warrior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warrior.swift; sourceTree = "<group>"; };
 		3F9B21211FEFB24100D34021 /* Wizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wizard.swift; sourceTree = "<group>"; };
 		3F9B21231FEFB2B700D34021 /* Titan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Titan.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				3FFF86811FE9584B00C5C107 /* main.swift */,
 				3F688F5B1FF26E48009E245F /* Game.swift */,
 				3F688F5D1FF26E87009E245F /* Team.swift */,
+				3F85E890201F48930083DA00 /* Input.swift */,
 				3F9B21271FEFB3DD00D34021 /* Characters */,
 				3FFF86961FEBFC7C00C5C107 /* Weapons */,
 			);
@@ -192,6 +195,7 @@
 				3FF6A6A8200A62550033702F /* Stick.swift in Sources */,
 				3F688F5C1FF26E48009E245F /* Game.swift in Sources */,
 				3F688F5E1FF26E87009E245F /* Team.swift in Sources */,
+				3F85E891201F48930083DA00 /* Input.swift in Sources */,
 				3FFF86951FEBFC4C00C5C107 /* Axe.swift in Sources */,
 				3FFF86821FE9584B00C5C107 /* main.swift in Sources */,
 				3FFF868D1FE9664700C5C107 /* Weapon.swift in Sources */,

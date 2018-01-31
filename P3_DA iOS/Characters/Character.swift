@@ -9,16 +9,18 @@
 import Foundation
 
 enum Type {
-    case Warrior, Wizard, Titan, Dwarf
+    case warrior, wizard, titan, dwarf
 }
 
 class Character {
+    // MARK: - Vars
     let name: String
     let type: Type
     var life: Int
     var weapon: Weapon
     let maxLife: Int
     
+    // MARK: - Init
     init(name: String, type: Type, life: Int, weapon: Weapon) {
         self.name = name
         self.type = type
@@ -27,8 +29,9 @@ class Character {
         self.maxLife = life
     }
     
+    // MARK: - Methods
     
-    // Une fonction permmettant d'attaquer un autre personnage et de lui enlever des points de vie en fonction des dégats de l'arme
+    // A function that allows you to attack another character and take away life points based on weapon damage
     func attack(target: Character) {
         if self.life > 0 && target.life > 0 {
             target.life -= self.weapon.damage
@@ -38,12 +41,13 @@ class Character {
             print("The target is already dead, you can't attack it")
         }
         
-         // Si la vie est négatif, on la ramène à 0 pour dire que le personnage est mort
+         // If life is negative, it is back to 0 to say that the character is dead
         if target.life < 0 {
             target.life = 0
         }
     }
     
+    // A function that display all the characteristics of the character
     func describeCharacter() {
         if life == 0 {
             print("\(name) is dead !")
