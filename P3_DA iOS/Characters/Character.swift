@@ -52,7 +52,7 @@ class Character {
         if life == 0 {
             print("\(name) is dead !")
         } else {
-            print("\(type) - \(name) - Life points: \(life) - Weapon: \(weapon.name) - Damage: \(weapon.damage) ")
+            print("\(type) - \(name) - Life points: [\(life)/\(maxLife)] - Weapon: \(weapon.name) - Damage: \(weapon.damage) ")
             }
     }
 }

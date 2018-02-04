@@ -31,7 +31,7 @@ class Wizard: Character {
         if life == 0 {
             print("\(name) is dead !")
         } else {
-            print("\(type) - \(name) - Life points: \(life) - Weapon: \(weapon.name) - Magic Power: \(weapon.magicPower) ")
+            print("\(type) - \(name) - Life points: [\(life)/\(maxLife)] - Weapon: \(weapon.name) - Magic Power: \(weapon.magicPower) ")
         }
     }
 }
