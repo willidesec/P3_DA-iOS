@@ -123,10 +123,8 @@ class Game {
                     wizard.heal(target: currentTarget)
                     
                     // Display the action that has just been performed
-                    if currentTarget.life != currentTarget.maxLife {
                         print()
                         print("\(currentCharacter.name) healed \(currentTarget.name) and give \(currentCharacter.weapon.magicPower) points of life")
-                    }
 
                 } else {
                     
