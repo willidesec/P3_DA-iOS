@@ -24,6 +24,9 @@ class Wizard: Character {
             print("The character's life is full, you can't heal him")
         } else if self.life > 0 && target.life > 0 {
             target.life += self.weapon.magicPower
+            if target.life > target.maxLife {
+                target.life = target.maxLife
+            }
         }
     }
     
